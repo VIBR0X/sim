@@ -10,6 +10,7 @@ import { sendEmail } from '@/lib/email/mailer'
 import { getFromEmailAddress } from '@/lib/email/utils'
 import { createLogger } from '@/lib/logs/console/logger'
 import type { EnterpriseSubscriptionMetadata } from '../types'
+import { v4 } from 'uuid'
 
 const logger = createLogger('BillingEnterprise')
 
@@ -102,7 +103,7 @@ export async function handleManualEnterpriseSubscription(event: Stripe.Event) {
   const referenceItem = stripeSubscription.items?.data?.[0]
 
   const subscriptionRow = {
-    id: crypto.randomUUID(),
+    id: v4(),
     plan: 'enterprise',
     referenceId,
     stripeCustomerId,

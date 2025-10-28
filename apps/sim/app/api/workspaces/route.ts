@@ -4,6 +4,7 @@ import { and, desc, eq, isNull } from 'drizzle-orm'
 import { NextResponse } from 'next/server'
 import { getSession } from '@/lib/auth'
 import { createLogger } from '@/lib/logs/console/logger'
+import { v4 } from 'uuid'
 
 const logger = createLogger('Workspaces')
 
@@ -83,8 +84,8 @@ async function createDefaultWorkspace(userId: string, userName?: string | null) 
 
 // Helper function to create a workspace
 async function createWorkspace(userId: string, name: string) {
-  const workspaceId = crypto.randomUUID()
-  const workflowId = crypto.randomUUID()
+  const workspaceId = v4()
+  const workflowId = v4()
   const now = new Date()
 
   // Create the workspace and initial workflow in a transaction
@@ -101,7 +102,7 @@ async function createWorkspace(userId: string, name: string) {
 
       // Create admin permissions for the workspace owner
       await tx.insert(permissions).values({
-        id: crypto.randomUUID(),
+        id: v4(),
         entityType: 'workspace' as const,
         entityId: workspaceId,
         userId: userId,

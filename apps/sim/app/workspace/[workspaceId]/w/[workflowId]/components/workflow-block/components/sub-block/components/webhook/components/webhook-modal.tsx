@@ -27,6 +27,7 @@ import {
   WhatsAppConfig,
 } from '@/app/workspace/[workspaceId]/w/[workflowId]/components/workflow-block/components/sub-block/components/webhook/components'
 import {
+import { v4 } from 'uuid'
   type ProviderConfig,
   WEBHOOK_PROVIDERS,
 } from '@/app/workspace/[workspaceId]/w/[workflowId]/components/workflow-block/components/sub-block/components/webhook/webhook'
@@ -150,7 +151,7 @@ export function WebhookModal({
       !isLoadingToken &&
       requireAuth
     ) {
-      const randomToken = crypto.randomUUID()
+      const randomToken = v4()
       setGeneralToken(randomToken)
       setOriginalValues((prev) => ({ ...prev, generalToken: randomToken }))
     }
@@ -401,7 +402,7 @@ export function WebhookModal({
   ])
 
   const formattedPath = useMemo(() => {
-    return webhookPath && webhookPath.trim() !== '' ? webhookPath : crypto.randomUUID()
+    return webhookPath && webhookPath.trim() !== '' ? webhookPath : v4()
   }, [webhookPath])
 
   // Construct the full webhook URL

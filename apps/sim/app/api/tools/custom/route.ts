@@ -7,6 +7,7 @@ import { getSession } from '@/lib/auth'
 import { createLogger } from '@/lib/logs/console/logger'
 import { generateRequestId } from '@/lib/utils'
 import { getUserId } from '@/app/api/auth/oauth/utils'
+import { v4 } from 'uuid'
 
 const logger = createLogger('CustomToolsAPI')
 
@@ -130,7 +131,7 @@ export async function POST(req: NextRequest) {
           } else {
             // No ID provided, create a new tool
             await tx.insert(customTools).values({
-              id: crypto.randomUUID(),
+              id: v4(),
               userId: session.user.id,
               title: tool.title,
               schema: tool.schema,

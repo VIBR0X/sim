@@ -6,6 +6,7 @@ import { createPermissionError, verifyWorkflowAccess } from '@/lib/copilot/auth/
 import type { BaseServerTool } from '@/lib/copilot/tools/server/base-tool'
 import { createLogger } from '@/lib/logs/console/logger'
 import { decryptSecret, encryptSecret } from '@/lib/utils'
+import { v4 } from 'uuid'
 
 interface SetEnvironmentVariablesParams {
   variables: Record<string, any> | Array<{ name: string; value: string }>
@@ -112,7 +113,7 @@ export const setEnvironmentVariablesServerTool: BaseServerTool<SetEnvironmentVar
       await db
         .insert(environment)
         .values({
-          id: crypto.randomUUID(),
+          id: v4(),
           userId,
           variables: finalEncrypted,
           updatedAt: new Date(),

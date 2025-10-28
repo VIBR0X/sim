@@ -6,6 +6,7 @@ import { motion } from 'framer-motion'
 import { AlertCircle, Paperclip, Send, Square, X } from 'lucide-react'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import { VoiceInput } from '@/app/chat/components/input/voice-input'
+import { v4 } from 'uuid'
 
 const PLACEHOLDER_MOBILE = 'Enter a message'
 const PLACEHOLDER_DESKTOP = 'Enter a message or click the mic to speak'
@@ -143,7 +144,7 @@ export const ChatInput: React.FC<{
       }
 
       newFiles.push({
-        id: crypto.randomUUID(),
+        id: v4(),
         name: file.name,
         size: file.size,
         type: file.type,

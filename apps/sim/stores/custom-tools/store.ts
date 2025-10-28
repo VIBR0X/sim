@@ -2,6 +2,7 @@ import { create } from 'zustand'
 import { devtools, persist } from 'zustand/middleware'
 import { createLogger } from '@/lib/logs/console/logger'
 import type { CustomToolsStore } from '@/stores/custom-tools/types'
+import { v4 } from 'uuid'
 
 const logger = createLogger('CustomToolsStore')
 const API_ENDPOINT = '/api/tools/custom'
@@ -130,7 +131,7 @@ export const useCustomToolsStore = create<CustomToolsStore>()(
         },
 
         addTool: (tool) => {
-          const id = crypto.randomUUID()
+          const id = v4()
           const newTool = {
             ...tool,
             id,

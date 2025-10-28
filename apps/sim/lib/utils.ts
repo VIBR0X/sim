@@ -3,6 +3,7 @@ import { type ClassValue, clsx } from 'clsx'
 import { twMerge } from 'tailwind-merge'
 import { env } from '@/lib/env'
 import { createLogger } from '@/lib/logs/console/logger'
+import { v4 } from 'uuid'
 
 const logger = createLogger('Utils')
 
@@ -409,7 +410,7 @@ export function getInvalidCharacters(name: string): string[] {
  * Generate a short request ID for correlation
  */
 export function generateRequestId(): string {
-  return crypto.randomUUID().slice(0, 8)
+  return v4().slice(0, 8)
 }
 
 /**

@@ -19,6 +19,7 @@ import type {
   WorkflowStore,
 } from '@/stores/workflows/workflow/types'
 import { generateLoopBlocks, generateParallelBlocks } from '@/stores/workflows/workflow/utils'
+import { v4 } from 'uuid'
 
 const logger = createLogger('WorkflowStore')
 
@@ -349,7 +350,7 @@ export const useWorkflowStore = create<WorkflowStore>()(
         }
 
         const newEdge: Edge = {
-          id: edge.id || crypto.randomUUID(),
+          id: edge.id || v4(),
           source: edge.source,
           target: edge.target,
           sourceHandle: edge.sourceHandle,
@@ -449,7 +450,7 @@ export const useWorkflowStore = create<WorkflowStore>()(
         const block = get().blocks[id]
         if (!block) return
 
-        const newId = crypto.randomUUID()
+        const newId = v4()
         const offsetPosition = {
           x: block.position.x + 250,
           y: block.position.y + 20,

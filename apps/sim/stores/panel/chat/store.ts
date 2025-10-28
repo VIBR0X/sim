@@ -19,7 +19,7 @@ export const useChatStore = create<ChatStore>()(
             const newMessage: ChatMessage = {
               ...message,
               // Preserve provided id and timestamp if they exist; otherwise generate new ones
-              id: (message as any).id ?? crypto.randomUUID(),
+              id: (message as any).id ?? v4(),
               timestamp: (message as any).timestamp ?? new Date().toISOString(),
             }
 

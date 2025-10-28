@@ -3,6 +3,7 @@ import { userStats, workflow } from '@sim/db/schema'
 import { eq, sql } from 'drizzle-orm'
 import { type NextRequest, NextResponse } from 'next/server'
 import { createLogger } from '@/lib/logs/console/logger'
+import { v4 } from 'uuid'
 
 const logger = createLogger('WorkflowStatsAPI')
 
@@ -49,7 +50,7 @@ export async function POST(request: NextRequest, { params }: { params: Promise<{
 
       if (userStatsRecords.length === 0) {
         await db.insert(userStats).values({
-          id: crypto.randomUUID(),
+          id: v4(),
           userId: workflowRecord.userId,
           totalManualExecutions: 0,
           totalApiCalls: 0,

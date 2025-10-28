@@ -9,6 +9,7 @@ import {
 import { mergeSubblockState } from '@/stores/workflows/utils'
 import { useWorkflowStore } from '@/stores/workflows/workflow/store'
 import type { WorkflowState } from '@/stores/workflows/workflow/types'
+import { v4 } from 'uuid'
 
 const logger = createLogger('CopilotTrainingStore')
 
@@ -138,7 +139,7 @@ export const useCopilotTrainingStore = create<CopilotTrainingState>()(
         const { activeWorkflowId } = useWorkflowStore.getState() as any
 
         const dataset: TrainingDataset = {
-          id: crypto.randomUUID(),
+          id: v4(),
           workflowId: activeWorkflowId || 'unknown',
           title: state.currentTitle,
           prompt: state.currentPrompt,

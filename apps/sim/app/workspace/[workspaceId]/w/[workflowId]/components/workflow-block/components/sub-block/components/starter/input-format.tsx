@@ -23,6 +23,7 @@ import { Textarea } from '@/components/ui/textarea'
 import { cn } from '@/lib/utils'
 import { useSubBlockValue } from '@/app/workspace/[workspaceId]/w/[workflowId]/components/workflow-block/components/sub-block/hooks/use-sub-block-value'
 import { useAccessibleReferencePrefixes } from '@/app/workspace/[workspaceId]/w/[workflowId]/hooks/use-accessible-reference-prefixes'
+import { v4 } from 'uuid'
 
 interface Field {
   id: string
@@ -50,7 +51,7 @@ interface FieldFormatProps {
 
 // Default values
 const DEFAULT_FIELD: Field = {
-  id: crypto.randomUUID(),
+  id: v4(),
   name: '',
   type: 'string',
   value: '',
@@ -104,7 +105,7 @@ export function FieldFormat({
 
     const newField: Field = {
       ...DEFAULT_FIELD,
-      id: crypto.randomUUID(),
+      id: v4(),
     }
     setStoreValue([...(fields || []), newField])
   }

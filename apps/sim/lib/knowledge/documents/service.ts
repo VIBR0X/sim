@@ -18,6 +18,7 @@ import { getRedisClient } from '@/lib/redis'
 import type { DocumentProcessingPayload } from '@/background/knowledge-processing'
 import { DocumentProcessingQueue } from './queue'
 import type { DocumentSortField, SortOrder } from './types'
+import { v4 } from 'uuid'
 
 const logger = createLogger('DocumentService')
 
@@ -515,7 +516,7 @@ export async function processDocumentAsync(
         logger.info(`[${documentId}] Creating embedding records with tags`)
 
         const embeddingRecords = processed.chunks.map((chunk, chunkIndex) => ({
-          id: crypto.randomUUID(),
+          id: v4(),
           knowledgeBaseId,
           documentId,
           chunkIndex,

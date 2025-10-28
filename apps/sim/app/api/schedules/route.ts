@@ -15,6 +15,7 @@ import {
   validateCronExpression,
 } from '@/lib/schedules/utils'
 import { generateRequestId } from '@/lib/utils'
+import { v4 } from 'uuid'
 
 const logger = createLogger('ScheduledAPI')
 
@@ -331,7 +332,7 @@ export async function POST(req: NextRequest) {
     }
 
     const values = {
-      id: crypto.randomUUID(),
+      id: v4(),
       workflowId,
       blockId,
       cronExpression,

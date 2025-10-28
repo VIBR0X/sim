@@ -12,6 +12,7 @@ import {
   validateChatAuth,
 } from '@/app/api/chat/utils'
 import { createErrorResponse, createSuccessResponse } from '@/app/api/workflows/utils'
+import { v4 } from 'uuid'
 
 const logger = createLogger('ChatIdentifierAPI')
 
@@ -142,7 +143,7 @@ export async function POST(
       const { createFilteredResult } = await import('@/app/api/workflows/[id]/execute/route')
 
       // Generate executionId early so it can be used for file uploads and workflow execution
-      const executionId = crypto.randomUUID()
+      const executionId = v4()
 
       const workflowInput: any = { input, conversationId }
       if (files && Array.isArray(files) && files.length > 0) {

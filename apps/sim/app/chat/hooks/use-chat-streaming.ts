@@ -4,6 +4,7 @@ import { useRef, useState } from 'react'
 import { createLogger } from '@/lib/logs/console/logger'
 import type { ChatMessage } from '@/app/chat/components/message/message'
 import { CHAT_ERROR_MESSAGES } from '@/app/chat/constants'
+import { v4 } from 'uuid'
 
 const logger = createLogger('UseChatStreaming')
 
@@ -99,7 +100,7 @@ export function useChatStreaming() {
 
     // Track which blocks have streamed content (like chat panel)
     const messageIdMap = new Map<string, string>()
-    const messageId = crypto.randomUUID()
+    const messageId = v4()
     setMessages((prev) => [
       ...prev,
       {

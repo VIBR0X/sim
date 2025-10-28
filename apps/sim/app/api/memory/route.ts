@@ -4,6 +4,7 @@ import { and, eq, isNull, like } from 'drizzle-orm'
 import { type NextRequest, NextResponse } from 'next/server'
 import { createLogger } from '@/lib/logs/console/logger'
 import { generateRequestId } from '@/lib/utils'
+import { v4 } from 'uuid'
 
 const logger = createLogger('MemoryAPI')
 
@@ -250,7 +251,7 @@ export async function POST(request: NextRequest) {
     } else {
       // Insert the new memory
       const newMemory = {
-        id: `mem_${crypto.randomUUID().replace(/-/g, '')}`,
+        id: `mem_${v4().replace(/-/g, '')}`,
         workflowId,
         key,
         type,

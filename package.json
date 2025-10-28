@@ -42,12 +42,14 @@
     "postgres": "^3.4.5",
     "remark-gfm": "4.0.1",
     "socket.io-client": "4.8.1",
-    "twilio": "5.9.0"
+    "twilio": "5.9.0",
+    "uuid": "13.0.0"
   },
   "devDependencies": {
     "@biomejs/biome": "2.0.0-beta.5",
     "@next/env": "15.4.1",
     "@octokit/rest": "^21.0.0",
+    "@types/uuid": "11.0.0",
     "drizzle-kit": "^0.31.4",
     "husky": "9.1.7",
     "lint-staged": "16.0.0",

@@ -1,5 +1,6 @@
 import { NextRequest } from 'next/server'
 import { vi } from 'vitest'
+import { v4 } from 'uuid'
 
 export interface MockUser {
   id: string

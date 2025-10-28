@@ -6,6 +6,7 @@ import { type NextRequest, NextResponse } from 'next/server'
 import { getSession } from '@/lib/auth'
 import { createLogger } from '@/lib/logs/console/logger'
 import { getUsersWithPermissions, hasWorkspaceAdminAccess } from '@/lib/permissions/utils'
+import { v4 } from 'uuid'
 
 const logger = createLogger('WorkspacesPermissionsAPI')
 
@@ -115,7 +116,7 @@ export async function PATCH(request: NextRequest, { params }: { params: Promise<
           )
 
         await tx.insert(permissions).values({
-          id: crypto.randomUUID(),
+          id: v4(),
           userId: update.userId,
           entityType: 'workspace' as const,
           entityId: workspaceId,

@@ -56,6 +56,7 @@ import { useCopilotStore } from '@/stores/copilot/store'
 import type { ChatContext } from '@/stores/copilot/types'
 import { useWorkflowStore } from '@/stores/workflows/workflow/store'
 import { ContextUsagePill } from '../context-usage-pill/context-usage-pill'
+import { v4 } from 'uuid'
 
 const logger = createLogger('CopilotUserInput')
 
@@ -584,7 +585,7 @@ const UserInput = forwardRef<UserInputRef, UserInputProps>(
 
         // Create a temporary file entry with uploading state
         const tempFile: AttachedFile = {
-          id: crypto.randomUUID(),
+          id: v4(),
           name: file.name,
           size: file.size,
           type: file.type,

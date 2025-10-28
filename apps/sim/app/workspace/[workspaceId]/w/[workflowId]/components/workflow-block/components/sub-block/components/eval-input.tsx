@@ -5,6 +5,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
 import { useSubBlockValue } from '@/app/workspace/[workspaceId]/w/[workflowId]/components/workflow-block/components/sub-block/hooks/use-sub-block-value'
+import { v4 } from 'uuid'
 
 interface EvalMetric {
   id: string
@@ -26,7 +27,7 @@ interface EvalInputProps {
 
 // Default values
 const createDefaultMetric = (): EvalMetric => ({
-  id: crypto.randomUUID(),
+  id: v4(),
   name: '',
   description: '',
   range: { min: 0, max: 1 },

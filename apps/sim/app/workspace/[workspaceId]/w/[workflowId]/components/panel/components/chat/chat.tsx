@@ -21,6 +21,7 @@ import { useExecutionStore } from '@/stores/execution/store'
 import { useChatStore } from '@/stores/panel/chat/store'
 import { useConsoleStore } from '@/stores/panel/console/store'
 import { useWorkflowRegistry } from '@/stores/workflows/registry/store'
+import { v4 } from 'uuid'
 
 const logger = createLogger('ChatPanel')
 
@@ -332,7 +333,7 @@ export function Chat({ chatMessage, setChatMessage }: ChatProps) {
     // Check if we got a streaming response
     if (result && 'stream' in result && result.stream instanceof ReadableStream) {
       // Create a single message for all outputs (like chat client does)
-      const responseMessageId = crypto.randomUUID()
+      const responseMessageId = v4()
       let accumulatedContent = ''
 
       // Add initial streaming message
@@ -643,7 +644,7 @@ export function Chat({ chatMessage, setChatMessage }: ChatProps) {
                   }
 
                   validNewFiles.push({
-                    id: crypto.randomUUID(),
+                    id: v4(),
                     name: file.name,
                     size: file.size,
                     type: file.type,
@@ -822,7 +823,7 @@ export function Chat({ chatMessage, setChatMessage }: ChatProps) {
                     }
 
                     newFiles.push({
-                      id: crypto.randomUUID(),
+                      id: v4(),
                       name: file.name,
                       size: file.size,
                       type: file.type,

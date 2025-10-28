@@ -4,6 +4,7 @@ import { createLogger } from '@/lib/logs/console/logger'
 import type { Variable, VariablesStore } from '@/stores/panel/variables/types'
 import { useWorkflowRegistry } from '@/stores/workflows/registry/store'
 import { useSubBlockStore } from '@/stores/workflows/subblock/store'
+import { v4 } from 'uuid'
 
 const logger = createLogger('VariablesStore')
 
@@ -126,7 +127,7 @@ export const useVariablesStore = create<VariablesStore>()(
     },
 
     addVariable: (variable, providedId?: string) => {
-      const id = providedId || crypto.randomUUID()
+      const id = providedId || v4()
 
       // Get variables for this workflow
       const workflowVariables = get().getVariablesByWorkflowId(variable.workflowId)
@@ -327,7 +328,7 @@ export const useVariablesStore = create<VariablesStore>()(
       if (!state.variables[id]) return ''
 
       const variable = state.variables[id]
-      const newId = providedId || crypto.randomUUID()
+      const newId = providedId || v4()
 
       // Ensure the duplicated name is unique
       const workflowVariables = get().getVariablesByWorkflowId(variable.workflowId)

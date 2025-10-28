@@ -14,6 +14,7 @@ import { getEmailPreferences } from '@/lib/email/unsubscribe'
 import { isBillingEnabled } from '@/lib/environment'
 import { createLogger } from '@/lib/logs/console/logger'
 import { getBaseUrl } from '@/lib/urls/utils'
+import { v4 } from 'uuid'
 
 const logger = createLogger('UsageManagement')
 
@@ -24,7 +25,7 @@ const logger = createLogger('UsageManagement')
 export async function handleNewUser(userId: string): Promise<void> {
   try {
     await db.insert(userStats).values({
-      id: crypto.randomUUID(),
+      id: v4(),
       userId: userId,
       currentUsageLimit: getFreeTierLimit().toString(),
       usageLimitUpdatedAt: new Date(),
@@ -211,7 +212,7 @@ export async function initializeUserUsageLimit(userId: string): Promise<void> {
 
   // Create initial usage stats
   await db.insert(userStats).values({
-    id: crypto.randomUUID(),
+    id: v4(),
     userId,
     // Team/enterprise: null (use org limit), Free/Pro: individual limit
     currentUsageLimit: isTeamOrEnterprise ? null : getFreeTierLimit().toString(),

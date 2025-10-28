@@ -1,8 +1,9 @@
 import type { Operation, OperationEntry } from './types'
+import { v4 } from 'uuid'
 
 export function createOperationEntry(operation: Operation, inverse: Operation): OperationEntry {
   return {
-    id: crypto.randomUUID(),
+    id: v4(),
     operation,
     inverse,
     createdAt: Date.now(),

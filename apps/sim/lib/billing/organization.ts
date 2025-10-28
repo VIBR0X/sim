@@ -3,6 +3,7 @@ import * as schema from '@sim/db/schema'
 import { and, eq } from 'drizzle-orm'
 import { syncUsageLimitsFromSubscription } from '@/lib/billing/core/usage'
 import { createLogger } from '@/lib/logs/console/logger'
+import { v4 } from 'uuid'
 
 const logger = createLogger('BillingOrganization')
 
@@ -46,7 +47,7 @@ async function createOrganizationWithOwner(
   organizationSlug: string,
   metadata: Record<string, any> = {}
 ): Promise<string> {
-  const orgId = `org_${crypto.randomUUID()}`
+  const orgId = `org_${v4()}`
 
   const [newOrg] = await db
     .insert(schema.organization)
@@ -60,7 +61,7 @@ async function createOrganizationWithOwner(
 
   // Add user as owner/admin of the organization
   await db.insert(schema.member).values({
-    id: crypto.randomUUID(),
+    id: v4(),
     userId: userId,
     organizationId: newOrg.id,
     role: 'owner',

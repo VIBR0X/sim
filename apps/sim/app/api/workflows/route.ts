@@ -8,6 +8,7 @@ import { createLogger } from '@/lib/logs/console/logger'
 import { getUserEntityPermissions } from '@/lib/permissions/utils'
 import { generateRequestId } from '@/lib/utils'
 import { verifyWorkspaceMembership } from './utils'
+import { v4 } from 'uuid'
 
 const logger = createLogger('WorkflowAPI')
 
@@ -113,7 +114,7 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    const workflowId = crypto.randomUUID()
+    const workflowId = v4()
     const now = new Date()
 
     logger.info(`[${requestId}] Creating workflow ${workflowId} for user ${session.user.id}`)

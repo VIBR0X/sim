@@ -11,6 +11,7 @@ import { validateWorkflowState } from '@/lib/workflows/validation'
 import { getAllBlocks } from '@/blocks/registry'
 import { resolveOutputType } from '@/blocks/utils'
 import { generateLoopBlocks, generateParallelBlocks } from '@/stores/workflows/workflow/utils'
+import { v4 } from 'uuid'
 
 interface EditWorkflowOperation {
   operation_type: 'add' | 'edit' | 'delete' | 'insert_into_subflow' | 'extract_from_subflow'
@@ -300,7 +301,7 @@ function addConnectionsAsEdges(
     const targetArray = Array.isArray(targets) ? targets : [targets]
     targetArray.forEach((targetId: string) => {
       modifiedState.edges.push({
-        id: crypto.randomUUID(),
+        id: v4(),
         source: blockId,
         sourceHandle,
         target: targetId,
@@ -542,7 +543,7 @@ function applyOperationsToWorkflowState(
 
               const addEdge = (targetBlock: string, targetHandle?: string) => {
                 modifiedState.edges.push({
-                  id: crypto.randomUUID(),
+                  id: v4(),
                   source: block_id,
                   sourceHandle: actualSourceHandle,
                   target: targetBlock,

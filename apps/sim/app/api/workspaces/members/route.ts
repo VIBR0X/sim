@@ -4,6 +4,7 @@ import { and, eq } from 'drizzle-orm'
 import { NextResponse } from 'next/server'
 import { getSession } from '@/lib/auth'
 import { hasAdminPermission } from '@/lib/permissions/utils'
+import { v4 } from 'uuid'
 
 type PermissionType = (typeof permissionTypeEnum.enumValues)[number]
 
@@ -73,7 +74,7 @@ export async function POST(req: Request) {
 
     // Create single permission for the new member
     await db.insert(permissions).values({
-      id: crypto.randomUUID(),
+      id: v4(),
       userId: targetUser.id,
       entityType: 'workspace' as const,
       entityId: workspaceId,

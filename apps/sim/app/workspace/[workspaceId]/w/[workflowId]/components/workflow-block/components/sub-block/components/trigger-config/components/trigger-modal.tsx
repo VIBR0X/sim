@@ -28,6 +28,7 @@ import type { TriggerConfig } from '@/triggers/types'
 import { CredentialSelector } from '../../credential-selector/credential-selector'
 import { TriggerConfigSection } from './trigger-config-section'
 import { TriggerInstructions } from './trigger-instructions'
+import { v4 } from 'uuid'
 
 const logger = createLogger('TriggerModal')
 
@@ -330,7 +331,7 @@ export function TriggerModal({
     let finalPath = triggerPath
 
     if (!finalPath && !generatedPath) {
-      const newPath = crypto.randomUUID()
+      const newPath = v4()
       setGeneratedPath(newPath)
       finalPath = newPath
     } else if (generatedPath && !triggerPath) {

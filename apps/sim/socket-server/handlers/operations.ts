@@ -6,6 +6,7 @@ import type { AuthenticatedSocket } from '@/socket-server/middleware/auth'
 import { checkRolePermission } from '@/socket-server/middleware/permissions'
 import type { RoomManager } from '@/socket-server/rooms/manager'
 import { WorkflowOperationSchema } from '@/socket-server/validation/schemas'
+import { v4 } from 'uuid'
 
 const logger = createLogger('OperationsHandlers')
 
@@ -103,7 +104,7 @@ export function setupOperationsHandlers(
           userName: session.userName,
           metadata: {
             workflowId,
-            operationId: crypto.randomUUID(),
+            operationId: v4(),
             isPositionUpdate: true,
           },
         }
@@ -167,7 +168,7 @@ export function setupOperationsHandlers(
           userName: session.userName,
           metadata: {
             workflowId,
-            operationId: crypto.randomUUID(),
+            operationId: v4(),
           },
         }
 
@@ -205,7 +206,7 @@ export function setupOperationsHandlers(
         // Add operation metadata for better client handling
         metadata: {
           workflowId,
-          operationId: crypto.randomUUID(),
+          operationId: v4(),
           isPositionUpdate, // Flag to help clients handle position updates specially
         },
       }

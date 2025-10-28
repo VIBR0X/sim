@@ -7,6 +7,7 @@ import {
 import { createLogger } from '@/lib/logs/console/logger'
 import { useVariablesStore } from '@/stores/panel/variables/store'
 import { useWorkflowRegistry } from '@/stores/workflows/registry/store'
+import { v4 } from 'uuid'
 
 interface OperationItem {
   operation: 'add' | 'edit' | 'delete'
@@ -126,7 +127,7 @@ export class SetGlobalWorkflowVariablesClientTool extends BaseClientTool {
         const typedValue = coerceValue(op.value, nextType)
         if (op.operation === 'add') {
           byName[key] = {
-            id: crypto.randomUUID(),
+            id: v4(),
             workflowId: payload.workflowId,
             name: key,
             type: nextType,
@@ -138,7 +139,7 @@ export class SetGlobalWorkflowVariablesClientTool extends BaseClientTool {
           if (!byName[key]) {
             // If editing a non-existent variable, create it
             byName[key] = {
-              id: crypto.randomUUID(),
+              id: v4(),
               workflowId: payload.workflowId,
               name: key,
               type: nextType,

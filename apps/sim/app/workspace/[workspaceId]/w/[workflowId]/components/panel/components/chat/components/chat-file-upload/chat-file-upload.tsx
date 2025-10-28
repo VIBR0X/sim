@@ -3,6 +3,7 @@
 import { useRef, useState } from 'react'
 import { File, FileText, Image, Paperclip, X } from 'lucide-react'
 import { createLogger } from '@/lib/logs/console/logger'
+import { v4 } from 'uuid'
 
 const logger = createLogger('ChatFileUpload')
 
@@ -83,7 +84,7 @@ export function ChatFileUpload({
       }
 
       newFiles.push({
-        id: crypto.randomUUID(),
+        id: v4(),
         name: file.name,
         size: file.size,
         type: file.type,

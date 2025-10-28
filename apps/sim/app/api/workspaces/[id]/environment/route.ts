@@ -7,6 +7,7 @@ import { getSession } from '@/lib/auth'
 import { createLogger } from '@/lib/logs/console/logger'
 import { getUserEntityPermissions } from '@/lib/permissions/utils'
 import { decryptSecret, encryptSecret, generateRequestId } from '@/lib/utils'
+import { v4 } from 'uuid'
 
 const logger = createLogger('WorkspaceEnvironmentAPI')
 
@@ -144,7 +145,7 @@ export async function PUT(request: NextRequest, { params }: { params: Promise<{ 
     await db
       .insert(workspaceEnvironment)
       .values({
-        id: crypto.randomUUID(),
+        id: v4(),
         workspaceId,
         variables: merged,
         createdAt: new Date(),
@@ -210,7 +211,7 @@ export async function DELETE(
     await db
       .insert(workspaceEnvironment)
       .values({
-        id: wsRows[0]?.id || crypto.randomUUID(),
+        id: wsRows[0]?.id || v4(),
         workspaceId,
         variables: current,
         createdAt: wsRows[0]?.createdAt || new Date(),

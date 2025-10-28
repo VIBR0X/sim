@@ -53,6 +53,7 @@ import type {
 import { useWorkflowDiffStore } from '@/stores/workflow-diff/store'
 import { useSubBlockStore } from '@/stores/workflows/subblock/store'
 import { useWorkflowStore } from '@/stores/workflows/workflow/store'
+import { v4 } from 'uuid'
 
 const logger = createLogger('CopilotStore')
 
@@ -447,7 +448,7 @@ function createUserMessage(
   messageId?: string
 ): CopilotMessage {
   return {
-    id: messageId || crypto.randomUUID(),
+    id: messageId || v4(),
     role: 'user',
     content,
     timestamp: new Date().toISOString(),
@@ -464,7 +465,7 @@ function createUserMessage(
 
 function createStreamingMessage(): CopilotMessage {
   return {
-    id: crypto.randomUUID(),
+    id: v4(),
     role: 'assistant',
     content: '',
     timestamp: new Date().toISOString(),
