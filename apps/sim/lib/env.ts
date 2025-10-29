@@ -27,10 +27,8 @@ export const env = createEnv({
     INTERNAL_API_SECRET:                   z.string().min(32),                     // Secret for internal API authentication
 
     // Copilot
-    COPILOT_PROVIDER:                      z.string().optional(),                  // Provider for copilot API calls
-    COPILOT_MODEL:                         z.string().optional(),                  // Model for copilot API calls
-    COPILOT_API_KEY:                       z.string().min(1).optional(),           // Secret for internal sim agent API authentication
-    SIM_AGENT_API_URL:                     z.string().url().optional(),            // URL for internal sim agent API
+    COPILOT_PROVIDER:                      z.string().optional(),                  // Provider for copilot API calls (default: 'google')
+    COPILOT_MODEL:                         z.string().optional(),                  // Model for copilot API calls (default: 'gemini-2.5-pro')
     AGENT_INDEXER_URL:                     z.string().url().optional(),            // URL for agent training data indexer
     AGENT_INDEXER_API_KEY:                 z.string().min(1).optional(),           // API key for agent indexer authentication
 
@@ -76,6 +74,7 @@ export const env = createEnv({
     ANTHROPIC_API_KEY_1:                   z.string().min(1).optional(),           // Primary Anthropic Claude API key
     ANTHROPIC_API_KEY_2:                   z.string().min(1).optional(),           // Additional Anthropic API key for load balancing
     ANTHROPIC_API_KEY_3:                   z.string().min(1).optional(),           // Additional Anthropic API key for load balancing
+    GEMINI_API_KEY:                        z.string().min(1).optional(),           // Google Gemini API key for copilot functionality
     OLLAMA_URL:                            z.string().url().optional(),            // Ollama local LLM server URL
     ELEVENLABS_API_KEY:                    z.string().min(1).optional(),           // ElevenLabs API key for text-to-speech in deployed chat
     SERPER_API_KEY:                        z.string().min(1).optional(),           // Serper API key for online search
