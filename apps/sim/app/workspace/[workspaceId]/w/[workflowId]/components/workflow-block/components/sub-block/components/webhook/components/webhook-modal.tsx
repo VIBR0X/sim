@@ -1,15 +1,3 @@
-import { useEffect, useMemo, useState } from 'react'
-import { Check, Copy, X } from 'lucide-react'
-import { Button } from '@/components/ui/button'
-import {
-  Dialog,
-  DialogContent,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from '@/components/ui/dialog'
-import { createLogger } from '@/lib/logs/console/logger'
-import { getBaseUrl } from '@/lib/urls/utils'
 import {
   AirtableConfig,
   DeleteConfirmDialog,
@@ -27,10 +15,22 @@ import {
   WhatsAppConfig,
 } from '@/app/workspace/[workspaceId]/w/[workflowId]/components/workflow-block/components/sub-block/components/webhook/components'
 import {
-import { v4 } from 'uuid'
   type ProviderConfig,
   WEBHOOK_PROVIDERS,
 } from '@/app/workspace/[workspaceId]/w/[workflowId]/components/workflow-block/components/sub-block/components/webhook/webhook'
+import {Button} from '@/components/ui/button'
+import {
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog'
+import {createLogger} from '@/lib/logs/console/logger'
+import {getBaseUrl} from '@/lib/urls/utils'
+import {Check, Copy, X} from 'lucide-react'
+import {useEffect, useMemo, useState} from 'react'
+import {v4} from 'uuid'
 
 const logger = createLogger('WebhookModal')
 
